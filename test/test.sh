@@ -525,6 +525,15 @@ test_auth_user() {
 	echo "curuser=$curuser"
 	test "$curuser" = "someuser" || return 1
 
+	admin "disable p0";
+	admin "set auth_type='md5'"
+	curuser=`psql -X -d "dbname=authdb user=someuser password=anypasswd" -tAq -c "select current_user;"`
+	grep "database p0 does not allow connections, using p1 instead" $BOUNCER_LOG
+	test $? || return 1
+ 	admin "show databases"
+	admin "show pools"
+	admin "enable p0";
+
 	curuser2=`psql -X -d "dbname=authdb user=nouser password=anypasswd" -tAq -c "select current_user;"`
 	echo "curuser2=$curuser2"
 	test "$curuser2" = "" || return 1

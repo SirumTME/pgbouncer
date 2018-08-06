@@ -16,6 +16,8 @@
 /test/test.log
 /test/test.pid
 
+.vscode/
+
 *.html
 *.xml
 *.exe
