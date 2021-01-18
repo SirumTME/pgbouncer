@@ -22,6 +22,8 @@
 /test/ssl/test.pid
 /test/ssl/TestCA1/
 
+.vscode/
+
 *.html
 *.xml
 *.exe
